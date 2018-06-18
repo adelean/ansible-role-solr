@@ -1,0 +1,24 @@
+- name: Check if JTS has been installed already.
+  stat:
+    path: "{{ solr_install_path }}/server/solr-webapp/webapp/WEB-INF/lib/jts-core-{{ jts_core_version }}.jar"
+  register: jts_install_path_status
+  
+- block:
+    - name: Download JTS and Polygons (flat).
+      get_url:
+        url: "{{ jts_core_base_url }}/{{ jts_core_version }}/jts-core-{{ jts_core_version }}.jar"
+        dest: "{{ solr_install_path }}/server/solr-webapp/webapp/WEB-INF/lib/jts-core-{{ jts_core_version }}.jar"
+        force: no
+      when: not jts_install_path_status.stat.exists
+      register: jts_download_status
+  when: jts_download_from_mirror
+
+- block:
+    - name: Copy JTS and Polygons (flat).
+      copy:
+        src: "{{ playbook_dir }}/files/jts-core-{{ jts_core_version }}.jar"
+        dest: "{{ solr_install_path }}/server/solr-webapp/webapp/WEB-INF/lib/jts-core-{{ jts_core_version }}.jar"
+        force: no
+      when: not jts_install_path_status.stat.exists
+      register: jts_download_status
+  when: not jts_download_from_mirror

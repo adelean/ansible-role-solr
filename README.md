@@ -80,7 +80,7 @@ The hostname or IP address on which Solr will be reachable. `localhost` should w
 
 Whether the `restart solr` handler should be used or not. If you're building containers or AMIs, you might need to disable the restart handler for a provisioning run.
 
-###Solr Cloud related variables
+### Solr Cloud related variables
 
     zookeeper_hosts_hostname: "{{inventory_hostname}}"
     zookeeper_hosts:
@@ -91,6 +91,15 @@ List of zookeeper hosts in the form of a dictionary (i.e. {zookeeper_hosts:[{hos
     zookeeper_client_port: 2181
 
 Zookeeper's client port
+
+### JTS and Polygons (flat) https://lucene.apache.org/solr/guide/7_3/spatial-search.html#jts-and-polygons-flat
+
+    jts_install: false
+    jts_core_base_url: https://repo1.maven.org/maven2/com/vividsolutions/jts-core
+    jts_core_version: 1.14.0
+    jts_download_from_mirror: true
+
+Variables connected to the JTS installation. See https://lucene.apache.org/solr/guide/7_3/spatial-search.html#jts-and-polygons-flat for more information.
 
 ### Variables used only for Solr < 5.
 

@@ -19,6 +19,12 @@ solr_home: "/var/{{ solr_service_name }}"
 solr_connect_host: localhost
 solr_port: "8983"
 
+#JTS and Polygons (flat) https://lucene.apache.org/solr/guide/7_3/spatial-search.html#jts-and-polygons-flat
+jts_install: false
+jts_core_base_url: https://repo1.maven.org/maven2/com/vividsolutions/jts-core
+jts_core_version: 1.14.0
+jts_download_from_mirror: true
+
 solr_xms: "256M"
 solr_xmx: "512M"
 
