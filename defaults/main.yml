@@ -29,6 +29,13 @@ solr_cores:
 
 solr_config_file: /etc/default/{{ solr_service_name }}.in.sh
 
+#Solr Cloud
+zookeeper_hosts_hostname: "{{inventory_hostname}}"
+# List of dict (i.e. {zookeeper_hosts:[{host:,ip:},{host:,ip:},...]})
+zookeeper_hosts:
+  - host: "{{zookeeper_hosts_hostname}}" # the machine running
+zookeeper_client_port: 2181
+
 # Enable restart solr handler
 solr_restart_handler_enabled: true
 

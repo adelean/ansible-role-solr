@@ -5,3 +5,6 @@
     state: restarted
     sleep: 5
   when: solr_restart_handler_enabled
+
+- name: reload systemctl
+  shell: systemctl daemon-reload

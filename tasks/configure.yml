@@ -19,4 +19,10 @@
       line: 'SOLR_PORT="{{ solr_port }}"'
     - regexp: "^.?SOLR_TIMEZONE="
       line: 'SOLR_TIMEZONE="{{ solr_timezone }}"'
-  notify: restart solr
+    - regexp: "^.?SOLR_HOST=.*$"
+      line: 'SOLR_HOST="{{ ansible_default_ipv4.address }}"'
+    - regexp: "^.?ZK_HOST=\"\""
+      line: 'ZK_HOST="{% for server in zookeeper_hosts %}{% if server.host is defined %}{{server.host}}:{{zookeeper_client_port}}{% else %}{{server}}:{{zookeeper_client_port}}{% endif %}{%if loop.index != loop.length %},{% endif %}{% endfor %}"'
+  notify: 
+    - restart solr
+    - reload systemctl

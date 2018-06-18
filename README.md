@@ -80,6 +80,18 @@ The hostname or IP address on which Solr will be reachable. `localhost` should w
 
 Whether the `restart solr` handler should be used or not. If you're building containers or AMIs, you might need to disable the restart handler for a provisioning run.
 
+###Solr Cloud related variables
+
+    zookeeper_hosts_hostname: "{{inventory_hostname}}"
+    zookeeper_hosts:
+      - host: "{{zookeeper_hosts_hostname}}" # the machine running
+
+List of zookeeper hosts in the form of a dictionary (i.e. {zookeeper_hosts:[{host:,ip:},{host:,ip:},...])
+
+    zookeeper_client_port: 2181
+
+Zookeeper's client port
+
 ### Variables used only for Solr < 5.
 
 The following variables are currently only applied to installations of Solr 4 and below:
