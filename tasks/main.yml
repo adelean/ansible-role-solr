@@ -52,6 +52,10 @@
 - include_tasks: install.yml
   when: "solr_version.split('.')[0] >= '5'"
 
+# Install JTS and Polygons (flat) See https://lucene.apache.org/solr/guide/7_3/spatial-search.html#jts-and-polygons-flat for details
+- include_tasks: install-jts.yml
+  when: jts_install
+
 - name: Ensure solr is started and enabled on boot if configured.
   service:
     name: "{{ solr_service_name }}"

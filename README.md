@@ -92,7 +92,7 @@ List of zookeeper hosts in the form of a dictionary (i.e. {zookeeper_hosts:[{hos
 
 Zookeeper's client port
 
-### JTS and Polygons (flat) https://lucene.apache.org/solr/guide/7_3/spatial-search.html#jts-and-polygons-flat
+### JTS and Polygons (flat)
 
     jts_install: false
     jts_core_base_url: https://repo1.maven.org/maven2/com/vividsolutions/jts-core
