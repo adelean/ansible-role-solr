@@ -1,4 +1,10 @@
 ---
+- name: Set system settings -- limits
+  include_tasks: limits.yml
+
+- name: Set system settings -- swap
+  include_tasks: minimize-swap.yml
+
 - import_tasks: user.yml
   when: solr_create_user
 
@@ -18,13 +24,13 @@
   register: solr_install_path_status
 
 - block:
-- name: Download Solr.
-  get_url:
-    url: "{{ solr_mirror }}/lucene/solr/{{ solr_version }}/{{ solr_filename }}.tgz"
-    dest: "{{ solr_workspace }}/{{ solr_filename }}.tgz"
-    force: no
-  when: solr_install_path_status.stat.isdir is not defined
-  register: solr_download_status
+    - name: Download Solr.
+      get_url:
+        url: "{{ solr_mirror }}/lucene/solr/{{ solr_version }}/{{ solr_filename }}.tgz"
+        dest: "{{ solr_workspace }}/{{ solr_filename }}.tgz"
+        force: no
+      when: solr_install_path_status.stat.isdir is not defined
+      register: solr_download_status
   when: solr_download_from_mirror
 
 - block:

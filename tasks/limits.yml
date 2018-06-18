@@ -1,0 +1,15 @@
+- name: Set sysctl File Limits
+  copy:
+    src: 50-fs.conf
+    dest: /etc/sysctl.d
+
+- name: Set Shell File Limits
+  copy:
+    src: 91-solr.conf
+    dest: /etc/security/limits.d
+
+- name: Set Solr Filehandle Limits
+  notify: reload systemctl
+  copy:
+    src: override.conf
+    dest: /etc/systemd/system/solr.service.d/

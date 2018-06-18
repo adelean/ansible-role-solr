@@ -1,0 +1,5 @@
+- name: Minimize the swappiness and ensure it is set appropriately on reboot
+  sysctl:
+    name: vm.swappiness
+    value: 1
+    state: present
